@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 const Box = styled.div`
-  background: #ffffff;
+  background: #FFFFFF;
   border-radius: 8px;
   padding: 16px;
-  margin-bottom: 8px;
-
+  /* CSS Pré-Pronto */
+  margin-bottom: 10px;
   .boxLink {
     font-size: 14px;
-    color: #2E7884;
+    color: #2E7BB4;
     text-decoration: none;
     font-weight: 800;
   }
@@ -51,10 +51,10 @@ const Box = styled.div`
   button {
     border: 0;
     padding: 8px 12px;
-    color: #ffffff;
+    color: #FFFFFF;
     border-radius: 10000px;
     background-color: #6F92BB;
   }
-`;
+`; 
 
 export default Box;
