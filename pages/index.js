@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import MainGrid from '../src/components/MainGrid'
 import Box from '../src/components/Box'
 import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons';
@@ -9,14 +9,12 @@ function ProfileSidebar(propriedades) {
     <Box as="aside">
       <img src={`https://github.com/${propriedades.githubUser}.png`} style={{ borderRadius: '8px' }} />
       <hr />
-
       <p>
         <a className="boxLink" href={`https://github.com/${propriedades.githubUser}`}>
           @{propriedades.githubUser}
         </a>
       </p>
       <hr />
-
       <AlurakutProfileSidebarMenuDefault />
     </Box>
   )
@@ -46,7 +44,7 @@ function ProfileRelationsBox(propriedades) {
 
 export default function Home() {
   const usuarioAleatorio = 'miltonr87';
-  const [comunidades, setComunidades] = React.useState([{
+  const [comunidades, setComunidades] = useState([{
     id: '12802378123789378912789789123896123', 
     title: 'Eu odeio acordar cedo',
     image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg'
@@ -54,7 +52,7 @@ export default function Home() {
   // const comunidades = comunidades[0];
   // const alteradorDeComunidades/setComunidades = comunidades[1];
   // const comunidades = ['Alurakut'];
-  const pessoasFavoritas = [
+  const programadoresFavoritos = [
     'clefebvre',
     'StephenGrider',
     'kubowania',
@@ -62,9 +60,9 @@ export default function Home() {
     'gustavoguanabara',
     'flaviohenriquealmeida',
   ]
-  const [seguidores, setSeguidores] = React.useState([]);
+  const [seguidores, setSeguidores] = useState([]);
   // 0 - Pegar o array de dados do github 
-  React.useEffect(function() {
+  useEffect(function() {
     fetch('https://api.github.com/users/peas/followers')
     .then(function (respostaDoServidor) {
       return respostaDoServidor.json();
@@ -95,7 +93,6 @@ export default function Home() {
 
             <OrkutNostalgicIconSet />
           </Box>
-
           <Box>
             <h2 className="subTitle">O que você deseja fazer?</h2>
             <form onSubmit={function handleCriaComunidade(e) {
@@ -115,20 +112,19 @@ export default function Home() {
             }}>
               <div>
                 <input
-                  placeholder="Qual vai ser o nome da sua comunidade?"
+                  placeholder="Escolha o nome da sua comunidade"
                   name="title"
-                  aria-label="Qual vai ser o nome da sua comunidade?"
+                  aria-label="Escolha o nome da sua comunidade"
                   type="text"
                   />
               </div>
               <div>
                 <input
-                  placeholder="Coloque uma URL para usarmos de capa"
+                  placeholder="Coloque uma URL para a capa"
                   name="image"
-                  aria-label="Coloque uma URL para usarmos de capa"
+                  aria-label="Coloque uma URL para a capa"
                 />
               </div>
-
               <button>
                 Criar comunidade
               </button>
@@ -156,11 +152,10 @@ export default function Home() {
           </ProfileRelationsBoxWrapper>
           <ProfileRelationsBoxWrapper>
             <h2 className="smallTitle">
-              Programadores Favoritos ({pessoasFavoritas.length})
+              Programadores Favoritos ({programadoresFavoritos.length})
             </h2>
-
             <ul>
-              {pessoasFavoritas.map((itemAtual) => {
+              {programadoresFavoritos.map((itemAtual) => {
                 return (
                   <li key={itemAtual}>
                     <a href={`/users/${itemAtual}`}>
