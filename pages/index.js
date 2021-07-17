@@ -76,12 +76,9 @@ export default function Home() {
   })
     .then((response) => response.json())
     .then((respostaCompleta) => {
-      const comunidadesVindasDoDato = respostaCompleta.data.allCommunities
-      console.log("teste->", comunidades)
+      const comunidadesVindasDoDato = respostaCompleta.data.allCommunities;
       setComunidades(comunidadesVindasDoDato)
     }, [])
-
-  console.log('seguidores antes do return', seguidores);
 
   return (
     <>
@@ -146,7 +143,7 @@ export default function Home() {
               {comunidades.map((itemAtual) => {
                 return (
                   <li key={itemAtual.id}>
-                    <a href={`/comunities/${itemAtual.title}`}>
+                    <a href={`/communities/${itemAtual.id}`}>
                       <img src={itemAtual.imageUrl} />
                       <span>{itemAtual.title}</span>
                     </a>
