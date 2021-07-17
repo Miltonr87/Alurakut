@@ -64,9 +64,9 @@ export default function Home() {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     },
-      body: JSON.stringify({ "query": `query
+      body: JSON.stringify({ "query": `query 
       {
-        allCommunities{
+        allCommunities {
           title
           id
           imageUrl
@@ -74,14 +74,12 @@ export default function Home() {
         }
       }` })
   })
-    .then((response) => {
-      response.json()
-    })
+    .then((response) => response.json())
     .then((respostaCompleta) => {
       const comunidadesVindasDoDato = respostaCompleta.data.allCommunities
       console.log("teste->", comunidades)
       setComunidades(comunidadesVindasDoDato)
-    })
+    }, [])
 
   console.log('seguidores antes do return', seguidores);
 
@@ -148,8 +146,8 @@ export default function Home() {
               {comunidades.map((itemAtual) => {
                 return (
                   <li key={itemAtual.id}>
-                    <a href={`/users/${itemAtual.title}`}>
-                      <img src={itemAtual.image} />
+                    <a href={`/comunities/${itemAtual.title}`}>
+                      <img src={itemAtual.imageUrl} />
                       <span>{itemAtual.title}</span>
                     </a>
                   </li>
