@@ -27,16 +27,6 @@ function ProfileRelationsBox(propriedades) {
         {propriedades.title} ({propriedades.items.length})
       </h2>
       <ul>
-        {/* {seguidores.map((itemAtual) => {
-          return (
-            <li key={itemAtual}>
-              <a href={`https://github.com/${itemAtual}.png`}>
-                <img src={itemAtual.image} />
-                <span>{itemAtual.title}</span>
-              </a>
-            </li>
-          )
-        })} */}
       </ul>
     </ProfileRelationsBoxWrapper>
   )
@@ -49,9 +39,7 @@ export default function Home() {
     title: 'Eu odeio acordar cedo',
     image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg'
   }]);
-  // const comunidades = comunidades[0];
-  // const alteradorDeComunidades/setComunidades = comunidades[1];
-  // const comunidades = ['Alurakut'];
+
   const programadoresFavoritos = [
     'clefebvre',
     'StephenGrider',
@@ -61,9 +49,9 @@ export default function Home() {
     'flaviohenriquealmeida',
   ]
   const [seguidores, setSeguidores] = useState([]);
-  // 0 - Pegar o array de dados do github 
-  useEffect(function () {
-    fetch('https://api.github.com/users/peas/followers')
+
+  useEffect(() => {
+    fetch('https://api.github.com/users/miltonr87/followers')
       .then(function (respostaDoServidor) {
         return respostaDoServidor.json();
       })
@@ -87,7 +75,7 @@ export default function Home() {
         <div className="welcomeArea" style={{ gridArea: 'welcomeArea' }}>
           <Box>
             <h1 className="title">
-              Bem vindo {usuarioAleatorio}
+              Bem-vindo(a), {usuarioAleatorio}
             </h1>
 
             <OrkutNostalgicIconSet />
