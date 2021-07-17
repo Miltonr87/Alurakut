@@ -34,11 +34,7 @@ function ProfileRelationsBox(propriedades) {
 
 export default function Home() {
   const usuarioAleatorio = 'miltonr87';
-  const [comunidades, setComunidades] = useState([{
-    id: '12802378123789378912789789123896123',
-    title: 'Eu odeio acordar cedo',
-    image: 'https://alurakut.vercel.app/capa-comunidade-01.jpg'
-  }]);
+  const [comunidades, setComunidades] = useState([]);
 
   const programadoresFavoritos = [
     'clefebvre',
@@ -60,10 +56,34 @@ export default function Home() {
       })
   }, [])
 
-  console.log('seguidores antes do return', seguidores);
+  //API GraphQL
+  fetch('https://graphql.datocms.com/', {
+    method: 'POST',
+    headers: {
+      'Authorization': '157b27bd91fa672fe9cf7f33effcd3',
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+      body: JSON.stringify({ "query": `query
+      {
+        allCommunities{
+          title
+          id
+          imageUrl
+          creatorSlug
+        }
+      }` })
+  })
+    .then((response) => {
+      response.json()
+    })
+    .then((respostaCompleta) => {
+      const comunidadesVindasDoDato = respostaCompleta.data.allCommunities
+      console.log("teste->", comunidades)
+      setComunidades(comunidadesVindasDoDato)
+    })
 
-  // 1 - Criar um box que vai ter um map, baseado nos items do array
-  // que pegamos do GitHub
+  console.log('seguidores antes do return', seguidores);
 
   return (
     <>
