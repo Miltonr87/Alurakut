@@ -64,7 +64,8 @@ export default function Home() {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     },
-      body: JSON.stringify({ "query": `query 
+    body: JSON.stringify({
+      "query": `query 
       {
         allCommunities {
           title
@@ -105,12 +106,23 @@ export default function Home() {
               console.log('Campo: ', dadosDoForm.get('image'));
 
               const comunidade = {
-                id: new Date().toISOString(),
                 title: dadosDoForm.get('title'),
                 image: dadosDoForm.get('image'),
+                creatorSlug: usuarioAleatorio,
               }
-              const comunidadesAtualizadas = [...comunidades, comunidade];
-              setComunidades(comunidadesAtualizadas)
+              fetch('/api/comunidades', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(comunidade)
+              })
+                .then(async (response) => {
+                  const dados = response.json();
+                  console.log(dados);
+                  const comunidadesAtualizadas = [...comunidades, comunidade];
+                  setComunidades(comunidadesAtualizadas);
+                })
             }}>
               <div>
                 <input
